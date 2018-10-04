@@ -75,17 +75,39 @@ describe('SCOPE', () => {
 
   it('exerciseH', () => {
     const result = scope.exerciseH();
-    expect(result).to.deep.equal([]);
+    expect(result).to.deep.equal([
+      { 'A': 4 },
+      { 'D': 9 },
+      { 'E': 10 },
+      { 'B': 9 },
+      { 'C': 4 }
+    ]);
   });
 
   it('exerciseI', () => {
     const result = scope.exerciseI();
-    expect(result).to.deep.equal([]);
+    expect(result).to.deep.equal([
+      { 'A': 75 },
+      { 'B': 0 },
+      { 'C': 75 },
+      { 'D': 80 },
+      { 'A': 55 },
+      { 'B': 0 },
+      { 'C': 55 },
+      { 'E': 55 }
+    ]);
   });
 
   it('exerciseJ', () => {
     const result = scope.exerciseJ();
-    expect(result).to.deep.equal([]);
+    expect(result).to.deep.equal([
+      { 'A':  'ketchup sandwich' },
+      { 'D':  'gouda' },
+      { 'B':  undefined },
+      { 'C':  'not a mediocre sandwich' },
+      { 'E':  'not a mediocre sandwich' },
+      { 'F':  'National Treasure' }
+    ]);
   });
 
   it('exerciseK', () => {
