@@ -112,26 +112,49 @@ describe('SCOPE', () => {
 
   it('exerciseK', () => {
     const result = scope.exerciseK();
-    expect(result).to.deep.equal([]);
+    expect(result).to.deep.equal([
+      { 'A': 7 },
+      { 'B': 7 }
+    ]);
   });
 
   it('exerciseL', () => {
     const result = scope.exerciseL();
-    expect(result).to.deep.equal([]);
+    expect(result).to.deep.equal([
+      { 'A': 95 },
+      { 'B': 95 },
+      { 'C': 90 }
+    ]);
   });
 
   it('exerciseM', () => {
     const result = scope.exerciseM();
-    expect(result).to.deep.equal([]);
+    expect(result).to.deep.equal([
+      { 'A': 5 },
+      { 'B': 6 },
+      { 'C': 'reference error' },
+      { 'D': 6 }
+    ]);
   });
 
   it('exerciseN', () => {
     const result = scope.exerciseN();
-    expect(result).to.deep.equal([]);
+    expect(result).to.deep.equal([
+      { 'E':  'Pam' },
+      { 'A':  'Pam' },
+      { 'B':  'Pam' },
+      { 'C':  'Louisa' },
+      { 'D':  'Louisa' },
+      { 'F':  'Louisa' }
+    ]);
   });
 
   it('exerciseO', () => {
     const result = scope.exerciseO();
-    expect(result).to.deep.equal([]);
+    expect(result).to.deep.equal([
+      { 'B': 'flipflop' },
+      { 'A': 'undefined' },
+      { 'C': 'flipflop' }
+    ]);
   });
 });

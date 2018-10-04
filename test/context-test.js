@@ -4,7 +4,7 @@ const context = require('../context/index');
 describe('CONTEXT', () => {
   it('exerciseA', () => {
     const result = context.exerciseA();
-    expect(result).to.equal('instance of ship');
+    expect(result).to.equal('instance of Ship');
   });
 
   it('exerciseB', () => {
@@ -29,7 +29,7 @@ describe('CONTEXT', () => {
 
   it('exerciseF', () => {
     const result = context.exerciseF();
-    expect(result).to.equal('instance of hero');  
+    expect(result).to.equal('instance of Hero');  
   });
 
   it('exerciseG', () => {
