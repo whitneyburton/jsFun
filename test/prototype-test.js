@@ -14,24 +14,24 @@ describe('PROTOTYPES', () => {
 
     it('studentsPerInstructor', () => {
       const result = turingPrompts.studentsPerInstructor();
-      expect(result).to.deep.equal();
+      expect(result).to.deep.equal({ cohort1806: 15, cohort1804: 7, cohort1803: 10, cohort1801: 9 });
     });
 
-    it('modulesPerInstructor', () => {
-      const result = turingPrompts.modulesPerInstructor();
-      expect(result).to.deep.equal();
+    it('modulesPerTeacher', () => {
+      const result = turingPrompts.modulesPerTeacher();
+      expect(result).to.deep.equal({Pam: [2, 4],Brittany: [2, 4],Nathaniel: [2, 4],Robbie: [4],Leta: [4, 2],Travis: [1, 2, 3, 4],Louisa: [1, 2, 3, 4],Christie: [1, 2, 3, 4],Will: [1, 2, 3, 4 ]});
     });
 
-    it('curriculumPerInstructor', () => {
-      const result = turingPrompts.curriculumPerInstructor();
-      expect(result).to.deep.equal();
+    it('curriculumPerTeacher', () => {
+      const result = turingPrompts.curriculumPerTeacher();
+      expect(result).to.deep.equal({ html: [ 'Travis', 'Louisa' ],css: [ 'Travis', 'Louisa' ],javascript: [ 'Travis', 'Louisa', 'Christie', 'Will' ],recursion: [ 'Pam', 'Leta' ],scope: [ 'Pam', 'Nathaniel', 'Will' ],oop: [ 'Brittany', 'Nathaniel', 'Will' ],react: [ 'Christie', 'Will' ],redux: [ 'Will' ],pwas: [ 'Brittany', 'Robbie', 'Leta', 'Louisa' ],mobile: [ 'Nathaniel' ],node: [ 'Pam', 'Robbie', 'Leta', 'Louisa', 'Christie' ] });
     });
   });
 
 
   describe('Club Prompts', () => {
     it('membersBelongingToClubs', () => {
-      const result = clubPrompts.membersBelongingToClubs();
+      const result = clubPrompts.membersBelongingToClubs({ Louisa: [ 'Drama', 'Art' ],Pam: [ 'Drama', 'Chess', 'Newspaper' ],Nathaniel: [ 'Drama', 'Astronomy' ],Leta: [ 'Band', 'Newspaper', 'Astronomy' ],Robbie: [ 'Band', 'Chess', 'FBLA' ],Jhun: [ 'Band', 'Art' ],Will: [ 'Band' ],David: [ 'Chess', 'Newspaper', 'FBLA' ],Brittany: [ 'Chess', 'Newspaper' ],Christie: [ 'Newspaper', 'FBLA' ] });
       expect(result).to.deep.equal();
     });
   });
@@ -40,7 +40,7 @@ describe('PROTOTYPES', () => {
   describe('Boss Prompts', () => {
     it('bossLoyalty', () => {
       const result = bossPrompts.bossLoyalty();
-      expect(result).to.deep.equal();
+      expect(result).to.deep.equal([ { bossName: 'Scar', sidekickLoyalty: 16 },{ bossName: 'Ursula', sidekickLoyalty: 20 },{ bossName: 'Jafar', sidekickLoyalty: 3 } ]);
     });
   });
 
@@ -48,17 +48,17 @@ describe('PROTOTYPES', () => {
   describe('Class Prompts', () => {
     it('feClassrooms', () => {
       const result = classPrompts.feClassrooms();
-      expect(result).to.deep.equal();
+      expect(result).to.deep.equal([ { roomLetter: 'A', program: 'FE', capacity: 32 },{ roomLetter: 'C', program: 'FE', capacity: 27 },{ roomLetter: 'E', program: 'FE', capacity: 22 },{ roomLetter: 'G', program: 'FE', capacity: 29 } ]);
     });
 
     it('totalCapacities', () => {
       const result = classPrompts.totalCapacities();
-      expect(result).to.deep.equal();
+      expect(result).to.deep.equal({ FE: 110, BE: 96 });
     });
 
     it('sortByCapacity', () => {
       const result = classPrompts.sortByCapacity();
-      expect(result).to.deep.equal();
+      expect(result).to.deep.equal([ { roomLetter: 'H', program: 'BE', capacity: 18 },{ roomLetter: 'F', program: 'BE', capacity: 19 },{ roomLetter: 'E', program: 'FE', capacity: 22 },{ roomLetter: 'C', program: 'FE', capacity: 27 },{ roomLetter: 'B', program: 'BE', capacity: 29 },{ roomLetter: 'G', program: 'FE', capacity: 29 },{ roomLetter: 'D', program: 'BE', capacity: 30 },{ roomLetter: 'A', program: 'FE', capacity: 32 } ]);
     });
 
   });
