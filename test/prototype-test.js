@@ -67,7 +67,7 @@ describe('PROTOTYPES', () => {
   describe('Mod Prompts', () => {
     it('studentsPerMod', () => {
       const result = modPrompts.studentsPerMod();
-      expect(result).to.deep.equal();
+      expect(result).to.deep.equal([ { mod: 1, studentsPerInstructor: 9 },{ mod: 2, studentsPerInstructor: 11 },{ mod: 3, studentsPerInstructor: 10 },{ mod: 4, studentsPerInstructor: 8 } ]);
     });
   });
 
@@ -75,17 +75,17 @@ describe('PROTOTYPES', () => {
   describe('Kitty Prompts', () => {
     it('orangeKittyNames', () => {
       const result = kittyPrompts.orangeKittyNames();
-      expect(result).to.deep.equal();
+      expect(result).to.deep.equal([ 'Tiger', 'Snickers' ]);
     });
 
     it('sortByAge', () => {
       const result = kittyPrompts.sortByAge();
-      expect(result).to.deep.equal();
+      expect(result).to.deep.equal([ { name: 'Snickers', age: 8, color: 'orange' },{ name: 'Tiger', age: 5, color: 'orange' },{ name: 'Felicia', age: 2, color: 'grey' },{ name: 'Max', age: 1, color: 'tuxedo' } ]);
     });
 
     it('growUp', () => {
       const result = kittyPrompts.growUp();
-      expect(result).to.deep.equal();
+      expect(result).to.deep.equal([{ name: 'Felicia', age: 4, color: 'grey' },{ name: 'Tiger', age: 7, color: 'orange' },{ name: 'Snickers', age: 10, color: 'orange' },{ name: 'Max', age: 3, color: 'tuxedo' } ]);
     });
   });
 
