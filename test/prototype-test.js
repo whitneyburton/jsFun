@@ -91,23 +91,27 @@ describe('PROTOTYPES', () => {
 
 
   describe('Pie Prompts', () => {
+    it('howManyIngredients', () => {
+      const result = piePrompts.howManyIngredients();
+      expect(result).to.deep.equal({ cinnamon: 50, sugar: 100 });
+    });
   });
 
 
   describe('Astronomy Prompts', () => {
     it('starsInConstellations', () => {
       const result = astronomyPrompts.starsInConstellations();
-      expect(result).to.deep.equal();
+      expect(result).to.deep.equal([ { name: 'Rigel',visualMagnitude: 0.13,constellation: 'Orion',lightYearsFromEarth: 860,color: 'blue' },{ name: 'Betelgeuse',visualMagnitude: 0.5,constellation: 'Orion',lightYearsFromEarth: 640,color: 'red' } ]);
     });
 
     it('starsByColor', () => {
       const result = astronomyPrompts.starsByColor();
-      expect(result).to.deep.equal();
+      expect(result).to.deep.equal({ blue: [ { name: 'Sirius', visualMagnitude: -1.46, constellation: 'Canis Major', lightYearsFromEarth: 8.6, color: 'blue' },{ name: 'Vega', visualMagnitude: 0.3, constellation: 'Lyra', lightYearsFromEarth: 25, color: 'blue' },{ name: 'Rigel', visualMagnitude: 0.13, constellation: 'Orion', lightYearsFromEarth: 860, color: 'blue' },{ name: 'Achernar', visualMagnitude: 0.46, constellation: 'The Plow', lightYearsFromEarth: 140, color: 'blue' },{ name: 'Hadar', visualMagnitude: 0.61, constellation: 'The Little Dipper', lightYearsFromEarth: 350, color: 'blue' } ],white: [ { name: 'Canopis', visualMagnitude: -0.74, constellation: 'Carina', lightYearsFromEarth: 310, color: 'white' },{ name: 'Procyon', visualMagnitude: 0.34, constellation: 'Canis Minor', lightYearsFromEarth: 11, color: 'white' } ],yellow: [ { name: 'Alpha Centauri', visualMagnitude: -0.27, constellation: '', lightYearsFromEarth: 4.4, color: 'yellow' },{ name: 'Capella', visualMagnitude: 0.08, constellation: 'Auriga', lightYearsFromEarth: 42, color: 'yellow' } ],orange: [ { name: 'Arcturus', visualMagnitude: -0.05, constellation: 'Boötes', lightYearsFromEarth: 37, color: 'orange' } ],red: [ { name: 'Betelgeuse', visualMagnitude: 0.5, constellation: 'Orion', lightYearsFromEarth: 640, color: 'red' } ] });
     });
 
     it('constellationsStarsExistIn', () => {
       const result = astronomyPrompts.constellationsStarsExistIn();
-      expect(result).to.deep.equal();
+      expect(result).to.deep.equal([ 'Canis Major','Carina','','Boötes','Lyra','Auriga','Orion','Canis Minor','The Plow','Orion','The Little Dipper' ]);
     });
   });
 
@@ -115,27 +119,27 @@ describe('PROTOTYPES', () => {
   describe('Cake Prompts', () => {
     it('allToppings', () => {
       const result = cakePrompts.allToppings();
-      expect(result).to.deep.equal();
+      expect(result).to.deep.equal([ 'dutch process cocoa','toasted sugar','smoked sea salt','berries','edible flowers','mint','cranberry','crystallized ginger' ]);
     });
 
     it('groceryList', () => {
       const result = cakePrompts.groceryList();
-      expect(result).to.deep.equal();
+      expect(result).to.deep.equal({ 'dutch process cocoa': 1,'toasted sugar': 3,'smoked sea salt': 3,berries: 2,'edible flowers': 2,mint: 1,cranberry: 1,'crystallized ginger': 2 });
     });
 
     it('stockPerCake', () => {
       const result = cakePrompts.stockPerCake();
-      expect(result).to.deep.equal();
+      expect(result).to.deep.equal([ { flavor: 'dark chocolate', inStock: 15 },{ flavor: 'yellow', inStock: 14 },{ flavor: 'white chiffon', inStock: 0 },{ flavor: 'butter rum', inStock: 9 },{ flavor: 'vanilla', inStock: 21 },{ flavor: 'honey', inStock: 0 } ]);
     });
 
     it('totalInventory', () => {
       const result = cakePrompts.totalInventory();
-      expect(result).to.deep.equal();
+      expect(result).to.deep.equal(59);
     });
 
     it('onlyInStock', () => {
       const result = cakePrompts.onlyInStock();
-      expect(result).to.deep.equal();
+      expect(result).to.deep.equal([ { cakeFlavor: 'dark chocolate',filling: null,frosting: 'dark chocolate ganache',toppings: [ 'dutch process cocoa', 'toasted sugar', 'smoked sea salt' ],inStock: 15 },{ cakeFlavor: 'yellow',filling: 'citrus glaze',frosting: 'chantilly cream',toppings: [ 'berries', 'edible flowers' ],inStock: 14 },{ cakeFlavor: 'butter rum',filling: 'ginger cardamom swirl',frosting: 'spiced rum glaze',toppings: [ 'crystallized ginger', 'toasted sugar' ],inStock: 9 },{ cakeFlavor: 'vanilla',filling: 'St Germaine',frosting: 'whipped cream',toppings: [ 'smoked sea salt', 'crystallized ginger', 'berries' ],inStock: 21 } ]);
     });
   });
 
