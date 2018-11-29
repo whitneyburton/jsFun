@@ -392,7 +392,7 @@ const breweryPrompts = {
 // to get the total, we will need breweries.beers.length
 
     const result = breweries.reduce((beerSum, currentBrewery) => {
-      return currentBrewery.beers.length += beerSum;
+      return beerSum += currentBrewery.beers.length;
     }, 0);
     return result;
 
@@ -413,7 +413,6 @@ const breweryPrompts = {
 // we want an array
 // map method 
     const result = breweries.map(brewery => {
-      // we only need brewery.name and brewery.beers.length
       return { name: brewery.name, beerCount: brewery.beers.length };
     });
     return result;
