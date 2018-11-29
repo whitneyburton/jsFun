@@ -426,11 +426,16 @@ const breweryPrompts = {
     // e.g.
     // { name: 'Barrel Aged Nature\'s Sweater', type: 'Barley Wine', abv: 10.9, ibu: 40 }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    const result = breweries.reduce((beerArray, brewery) => {
+      beerArray = beerArray.concat(brewery.beers);
+      return beerArray;
+    }, []).sort((a, b) => {
+      return b.abv - a.abv;
+    });
+    return result[0];
 
     // Annotation:
-    // Write your annotation here as a comment
+    // 
   }
 };
 
@@ -502,7 +507,17 @@ const turingPrompts = {
     // cohort1804: 10.5
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // start with an array 
+    // we need an object 
+    // will need reduce method 
+
+    const result = cohorts.reduce((ratioObj, cohort) => {
+        let matchingCohorts = instructors.filter(instuctor => {
+            return instuctor.module === cohort.module;
+        });
+        ratioObj['cohort' + cohort.cohort] = cohort.studentCount/matchingCohorts.length;
+        return ratioObj;
+    }, {});
     return result;
 
     // Annotation:
