@@ -108,7 +108,7 @@ const scope = {
     let greeting = 'howdy';
 
     const greetingGenerator = () => {
-      let greeting = 'hi';
+      let greeting = 'hi'; // 'welcome'
 
       if (greeting === 'hi') {
         let greeting = 'hello';
@@ -131,7 +131,12 @@ const scope = {
 
     // Log D: greeting
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { 'A': 'hi' },
+      { 'B': 'welcome' },
+      { 'C': 'welcome' },
+      { 'D': 'howdy' }
+    ];
     return result;
 
     // Annotation:
@@ -163,7 +168,12 @@ const scope = {
 
     // Log D: name
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { 'C': 'Brittany' },
+      { 'A': 'Nathaniel' },
+      { 'B': 'Nathaniel' },
+      { 'D': 'Brittany' },
+    ];
     return result;
 
     // Annotation:
@@ -198,7 +208,13 @@ const scope = {
 
     // Log E: dog
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { 'A': 'Spot' },
+      { 'B': 'Spot' },
+      { 'C': 'Biscuit' },
+      { 'D': 'Biscuit' },
+      { 'E': 'Biscuit' }
+    ];
     return result;
 
     // Annotation:
@@ -228,11 +244,16 @@ const scope = {
 
     // Log D: fruit
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { 'A': 'reference error' },
+      { 'B': 'mango' },
+      { 'C': 'mango' },
+      { 'D': 'apple' },
+    ];
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // const fruit on line 234 is in the Temporal Dead Zone 
   },
 
   exerciseH() {
@@ -268,7 +289,13 @@ const scope = {
 
     fn1();
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { 'A': 4 },
+      { 'D': 9 },
+      { 'E': 10 },
+      { 'B': 9 },
+      { 'C': 4 }
+    ];
     return result;
 
     // Annotation:
@@ -299,7 +326,17 @@ const scope = {
     eatSnack();
     // Log E: hunger
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { 'A': 75 },
+      { 'B': 0 },
+      { 'C': 75 },
+      { 'D': 80 },
+      { 'A': 55 },
+      { 'B': 0 },
+      { 'C': 55 },
+      { 'E': 55 },
+
+    ];
     return result;
 
     // Annotation:
@@ -340,7 +377,13 @@ const scope = {
     // Log E: sandwich
     // Log F: amandaBynes
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { 'A': 4 },
+      { 'D': 9 },
+      { 'E': 10 },
+      { 'B': 9 },
+      { 'C': 4 }
+    ];
     return result;
 
     // Annotation:

@@ -21,23 +21,31 @@ const { weapons, characters } = require('./datasets/ultima');
 const kittyPrompts = {
   orangeKittyNames() {
     // Return an array of just the names of kitties who are orange e.g.
+    // 
     // ['Tiger', 'Snickers']
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = kitties.filter((kitty) => {
+        return kitty.color === 'orange';
+    }).map((kitty) => {
+        return kitty.name;
+    });
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // First we had to determine what prototype method to use, and we chose the filter method because we knew that we would need to return an array that is a subset of the original array based on the color property. Then we needed to return only the name of each kitty, so we chose the map method to grab just the names of the orange kitties. 
   },
 
   sortByAge() {
     // Sort the kitties by their age
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // let sortedKitties = [...kitties]
+    // ... is the spread operator to make a copy of the kitties dataset
+    const result = kitties.sort((a, b) => {
+        return b.age - a.age;
+    });
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // The method to use to sort all of the kitties by their age is the sort method. The sort method takes two parameters which we passed in as a and b. The sort method returns b.age - a.age so that the new sorted array will go from oldest to youngest.
   },
 
   growUp() {
@@ -54,7 +62,10 @@ const kittyPrompts = {
     // },
     // ...etc]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = kitties.map((kitty) => {
+        kitty.age += 2;
+        return kitty;
+    });
     return result;
   }
 };
@@ -81,16 +92,26 @@ const clubPrompts = {
     // Create an object whose keys are the names of people, and whose values are
     // arrays that include the names of the clubs that person is a part of. e.g. 
     // {
-    //   Louisa: ['Drama', 'Art'],
+    //   Louisa: ['Drama'],
     //   Pam: ['Drama', 'Art', 'Chess'],
     //   ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = clubs.reduce((acc, club) => {
+        club.members.forEach(member => {
+            if (!acc[member]) {
+                acc[member] = [club.club]
+            } else {
+                acc[member].push(club.club)
+            }
+        })  
+        return acc;
+    }, {});
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // In order to create a new object of each member and the clubs they belong to, I needed to use the reduce method. The reduce method takes in the parameters of the accumulator (which in this case is an empty object), and the current element (which is the single club instance). Then I used a forEach method in order to iterate over each members property which needed a conditional to first check if the accumulator DOESN'T already have that given members name in it. If it doesn't, it that's that members name and assigns it to an array with that club name that is associated with for that iteration. If it does already exist, it takes that iterations club name and assigns it to the member object. 
   }
 };
 
@@ -114,6 +135,7 @@ const clubPrompts = {
 const modPrompts = {
   studentsPerMod() {
     // Return an array of objects where the keys are mod (the number of the module)
+    // will use map() because the array will be the same length once returned 
     // and studentsPerInstructor (how many students per instructor there are for that mod) e.g.
     // [
     //   { mod: 1, studentsPerInstructor: 9 },
@@ -122,7 +144,12 @@ const modPrompts = {
     //   { mod: 4, studentsPerInstructor: 8 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = mods.map((mod) => {
+        // create studentsPerInstructor variable 
+        // assign it to mod.students/mod.instructors 
+        let studentsPerInstructor = (mod.students / mod.instructors);
+        return {mod: mod.mod, studentsPerInstructor: studentsPerInstructor};
+    });
     return result;
 
     // Annotation:
@@ -157,11 +184,16 @@ const cakePrompts = {
     //    ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.map((cake) => {
+        return {
+            flavor: cake.cakeFlavor,
+            inStock: cake.inStock
+        }
+    });
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // In order to return an array that includes only the flavor and inStock properties of each cake, the 
   },
 
   onlyInStock() {
@@ -185,22 +217,27 @@ const cakePrompts = {
     // ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.filter((cake) => {
+        return cake.inStock;
+    });
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // In order to return only the cakes that are in stock, you need to use the filter method to find only the cakes that result in cake.inStock returning "true". The filter method then puts those that are true into a new array. 
   },
   
   totalInventory() {
     // Return the total amount of cakes in stock e.g.
     // 59
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((acc, cake) => {
+        acc += cake.inStock;
+        return acc;
+    }, 0);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // The reduce method here iterates over each cake and starting at 0 for the accumulator, it adds the number thats held as the value for inStock and then that is assigned to be the new accumulator value for the next iteration. 
   },
 
   allToppings() {
@@ -208,11 +245,18 @@ const cakePrompts = {
     // every cake in the dataset e.g.
     // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((acc, cake) => {
+        cake.toppings.forEach(topping => {
+            if (acc.indexOf(topping) === -1) {
+                acc.push(topping);
+            }
+        })
+        return acc;
+    }, []);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // In order to create a new array of only the unique toppings needed, you need to use the reduce method so that you can start your initial value as an empty array, and then push each unique topping into that array (also, we know that it's reduce because we can see that the length of this new array will be different that the existing array). By looking at the cake objects property of toppings and then running a forEach loop on each specific topping, we can then create a condition which checks to make sure that within the accumulator (an array with the current unique toppings) that the topping the forEach loop is currently looking at doesn't already exist within the array by making sure that that indexOf method doesn't return a value of -1 (falsy). IF that index returns falsy, which means that that topping hasn't been added yet, it will then execute the code which runs the push method on the accumulator which adds that unique topping to our new array. 
   },
 
   groceryList() {
@@ -226,11 +270,20 @@ const cakePrompts = {
     //    ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((groceryListObj, cake) => {
+        cake.toppings.forEach(topping => {
+            if (!groceryListObj[topping]) {
+              groceryListObj[topping] = 1;
+            } else {
+              groceryListObj[topping]++;
+            }
+        })
+        return groceryListObj;
+    }, {});
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // The reduce method allows us to create a new empty object. In the 
   }
 };
 
@@ -261,11 +314,13 @@ const classPrompts = {
     //   { roomLetter: 'G', program: 'FE', capacity: 29 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.filter(classroom => {
+        return classroom.program === 'FE';
+    });
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // The filter method allows us to look at each individual classroom and check to see if the program property is strictly equal to 'FE', and if that evaluates to true, then it keeps that object within the array. If not, it excludes that from the array. 
   },
 
   totalCapacities() {
@@ -276,21 +331,38 @@ const classPrompts = {
     //   beCapacity: 96
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.reduce((capacityObj, classroom) => {
+      if (classroom.program === 'FE') {
+        capacityObj.feCapacity += classroom.capacity;
+      } else {
+        capacityObj.beCapacity += classroom.capacity;
+      }
+        return capacityObj;
+    }, { feCapacity: 0, beCapacity: 0 });
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Right away I know that I know that I will need to use the reduce method because I will be creating a new object that has different keys from the cakes objects. The two parameters for the reduce method are the accumulator, which is an empty object named capacityObj, and the current element, which here is each classroom. I assigned the two objects key:value pairs within the empty object because I knew I only had two specific keys to assign. Within the reduce method I included a conditional if statement which checked to see if the current elements program property has a value of 'FE', and if so, assign and add that current elements capacity value to the feCapacity key's value. If the conditional doesn't evaluate to true, it bumps to the else statement which does the same process for the beCapacity key. 
   },
 
   sortByCapacity() {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // 
+    // iterate over the capacity property of the classrooms object 
+    // 
+
+    // const result = kitties.sort((a, b) => {
+    //     return b.age - a.age;
+    // });
+
+    const result = classrooms.sort((a, b) => {
+        return a.capacity - b.capacity;
+    });
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Because I want to sort the classrooms by capacity I know that I need the sort method. This method sorts the array by each indices capacity property and returns them in ascending order. 
   }
 };
 
@@ -316,7 +388,12 @@ const breweryPrompts = {
     // Return the total beer count of all beers for every brewery e.g.
     // 40
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+// we need to return a single value (reduce method)
+// to get the total, we will need breweries.beers.length
+
+    const result = breweries.reduce((beerSum, currentBrewery) => {
+      return currentBrewery.beers.length += beerSum;
+    }, 0);
     return result;
 
     // Annotation:
@@ -332,7 +409,13 @@ const breweryPrompts = {
     // ...etc.
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+// we are given the breweries array 
+// we want an array
+// map method 
+    const result = breweries.map(brewery => {
+      // we only need brewery.name and brewery.beers.length
+      return { name: brewery.name, beerCount: brewery.beers.length };
+    });
     return result;
 
     // Annotation:
@@ -392,8 +475,22 @@ const turingPrompts = {
     //  { name: 'Robbie', studentCount: 18 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    // map over instructors array 
+    // find the matching cohort for our current instructor 
+    // grab the studentCount value from the matching cohort 
+    // return an object with the instructor name and studentCount as properties 
+
+// will need instructor.name and cohorts.module 
+    const result = instructors.map(instructor => {
+        let matchingCohort = cohorts.find(cohort => {
+        return cohort.module === instructor.module;
+        })        
+
+        let numberOfStudents = matchingCohort.studentCount; 
+        
+        return {name: instructor.name, studentCount: numberOfStudents}
+    });
+        return result;
 
     // Annotation:
     // Write your annotation here as a comment
