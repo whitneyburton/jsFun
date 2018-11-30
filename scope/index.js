@@ -29,8 +29,14 @@ const scope = {
 
     // Log D: personC
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { 'A': 'Ben' },
+      { 'B': 'CardiB' },
+      { 'C': 'CardiB' },
+      { 'D': 'Paul'}
+    ];
     return result;
+
 
     // Annotation:
     // Write your annotation here as a comment
@@ -271,7 +277,7 @@ const scope = {
 
         const newNum = num;
 
-        // Log B: newNum
+        // Log B: newNum 
       }
 
       newNum = num;

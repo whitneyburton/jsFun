@@ -37,16 +37,15 @@ const context = {
     return result;
 
     // Annotation:
-    // When we call fn(), the dot notation this.value is intended to reference the object 
-    // within which it was created. In this case, this.value was simply created within a named
-    // function, therefore rule #1 applies where this must refer to the global window object
-    // because it has we have not changed what the value of this is. 
+    // When we call fn(), an ES5 function is fired which means that it's 'this' value isn't bound until it's 
+    // invoked. When fn() is invoked, the value of 'this' has not been changed or assigned to an object, 
+    // so it defaults to the window because of rule#1.
   },
 
   exerciseC() {
     const car = {
       make: 'Tesla',
-      getInfo: function(){
+      getInfo: function() {
         console.log(this);
       }
     };
@@ -67,7 +66,7 @@ const context = {
   exerciseD() {
     const dog = {
       breed: 'Chihuahua',
-      getBreed: function(){
+      getBreed: function() {
         const innerFunction = function() {
           console.log(this.breed);
         };
@@ -87,6 +86,9 @@ const context = {
     // log the window as its context. 
   },
 
+
+
+
   exerciseE() {
 
     const fn = () => {
@@ -100,9 +102,7 @@ const context = {
     return result;
 
     // Annotation: 
-    // because the value variable is assigned without a var/let/const declaration, it is hoisted 
-    // and automaticlly assigned as a global variable in memory. Therefore, when fn is invoked, 
-    // the value of 'this' defaults to the global window object (rule #1)
+    // because the when fn is invoked, the value of 'this' defaults to the global window object (rule #1)
   },
 
   exerciseF() {
@@ -125,7 +125,7 @@ const context = {
     return result;
 
     // Annotation: 
-    // Write your annotation here as a comment
+    // 
   },
 
   exerciseG() {
@@ -146,7 +146,6 @@ const context = {
     }
 
     const monopoly = new Game('Monopoly');
-
 
     // What is the value of `this` when we call monopoly.restart()?
     const result = 'global window object';
@@ -199,7 +198,8 @@ const context = {
     return result;
 
     // Annotation: 
-    // Poets is passed in as an argument after the poets.map callback function so therefore this keeps 
+    // Poets is passed in as an argument after the poets.map callback function so therefore it keeps the 
+    // value of this to poets
     // 
   },
 
@@ -210,26 +210,26 @@ const context = {
     });
 
     // What is the value of `this` when a user clicks on our #btn element and the callback is triggered?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'el';
     return result;
 
     // Annotation: 
     // Write your annotation here as a comment.
   },
 
-  exerciseK() {
-    const el = $('#btn');
-    el.on('click', () => {
-      console.log(this);
-    });
+  // exerciseK() {
+  //   const el = $('#btn');
+  //   el.on('click', () => {
+  //     console.log(this);
+  //   });
 
     // What is the value of `this` when a user clicks on our #btn element and the callback is triggered?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    // const result = 'REPLACE WITH YOUR RESULT HERE';
+    // return result;
 
     // Annotation: 
     // Write your annotation here as a comment.
-  }
+//   }
 
 };
 

@@ -388,12 +388,15 @@ const breweryPrompts = {
     // Return the total beer count of all beers for every brewery e.g.
     // 40
 
-// we need to return a single value (reduce method)
-// to get the total, we will need breweries.beers.length
-
-    const result = breweries.reduce((beerSum, currentBrewery) => {
-      return beerSum += currentBrewery.beers.length;
-    }, 0);
+// we have one array 
+// we want a single number 
+// use reduce()
+// acc will be a sum of all the breweries beer arrays 
+// on each iteration, look at the beers property and get the array.length
+// add/assign that to our accumulator 
+    const result = breweries.reduce((sum, brewery) => {
+        return sum += brewery.beers.length;
+    }, 0)
     return result;
 
     // Annotation:
@@ -409,12 +412,13 @@ const breweryPrompts = {
     // ...etc.
     // ]
 
-// we are given the breweries array 
-// we want an array
-// map method 
+// given an array 
+// given back an array 
+// use map
+
     const result = breweries.map(brewery => {
-      return { name: brewery.name, beerCount: brewery.beers.length };
-    });
+        return { name: brewery.name, beerCount: brewery.beers.length }
+    })
     return result;
 
     // Annotation:
@@ -432,7 +436,7 @@ const breweryPrompts = {
     }, []).sort((a, b) => {
       return b.abv - a.abv;
     });
-    return result[0];
+    return result.shift();
 
     // Annotation:
     // 
@@ -515,7 +519,7 @@ const turingPrompts = {
         let matchingCohorts = instructors.filter(instuctor => {
             return instuctor.module === cohort.module;
         });
-        ratioObj['cohort' + cohort.cohort] = cohort.studentCount/matchingCohorts.length;
+        ratioObj['cohort' + cohort.cohort] = cohort.studentCount / matchingCohorts.length;
         return ratioObj;
     }, {});
     return result;
@@ -534,7 +538,26 @@ const turingPrompts = {
     //   Pam: [2, 4]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // given two arrays 
+    // want an object 
+    // method: reduce()
+    // because we we will each instructor as a key, we know we can start with the instructors object 
+
+    // first, we need to iterate over instructors and grab each ones name and set it as the key 
+    // then, we need to have a forEach to check each subject that each instructor teaches 
+    // and check that against the cohorts.curriculum array to see if they match and if so, push the mod # into the array 
+
+    const result = instructors.reduce((obj, instructor) => {
+        let modsCanTeach = obj[instructor.name] = [];
+        instructor.teaches.forEach(subject => {
+          cohorts.forEach(cohort => {
+            if (cohort.curriculum.includes(subject) && !modsCanTeach.includes(cohort.module)) {
+              modsCanTeach.push(cohort.module);
+            } 
+          })
+        })
+        return obj;
+    }, {} );
     return result;
 
     // Annotation:
@@ -551,7 +574,23 @@ const turingPrompts = {
     //   recursion: [ 'Pam', 'Leta' ]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // have two arrays 
+    // need an object
+    // REDUCE 
+
+    const result = cohorts.reduce((obj, cohort) => {
+      cohort.curriculum.forEach(subject => {
+        obj[subject] = [];
+        instructors.forEach(instructor => {
+          if (instructor.teaches.includes(subject)) {
+            obj[subject].push(instructor.name);
+          }
+        })
+      })
+
+      return obj;
+    }, {} );
+
     return result;
 
     // Annotation:
@@ -578,15 +617,27 @@ const turingPrompts = {
 // DATASET: bosses, sidekicks from ./datasets/bosses
 const bossPrompts = {
   bossLoyalty() {
-    // Create an array of objects that each have the name of the boss and the sum
-    // loyalty of all their sidekicks. e.g.:
+    // Create an array of objects that each have the name of the boss and the sum loyalty of all their sidekicks. e.g.:
     // [
     //   { bossName: 'Jafar', sidekickLoyalty: 3 },
     //   { bossName: 'Ursula', sidekickLoyalty: 20 },
     //   { bossName: 'Scar', sidekickLoyalty: 16 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // we are given two arrays 
+    // we need an array 
+    // use map
+
+    const result = Object.keys(bosses).reduce((array, boss) => {
+      let name = bosses[boss].name;
+      let loyaltySum = sidekicks.filter(sidekick => {
+        return sidekick.boss === name;
+      }).reduce((sum, sidekick) => {
+        return sum += sidekick.loyaltyToBoss;
+      }, 0)
+      array.push({ bossName: name, sidekickLoyalty: loyaltySum })
+      return array;
+    }, []);
     return result;
 
     // Annotation:
@@ -628,11 +679,23 @@ const astronomyPrompts = {
     //     color: 'red' }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // we are given an object and an array 
+    // we want an array 
+    // use filter method 
+
+    const result = stars.filter(star => { 
+        let passFilter = false;
+        Object.keys(constellations).forEach(constellationKey => { 
+            if (constellations[constellationKey].stars.includes(star.name)) {
+                passFilter = true;
+            }
+        })
+        return passFilter;
+    });
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // In order to create a new array which includes stars that appear in the contellations you use the filter method on the stars array. The filter takes in each individual star, which is an object. In order to access the properties within each object you use Object.keys of the constellations object, and then with those keys you utilize a forEach iterator method over each of the constellations. forEach takes in each contellationKey and runs a conditional which checks to see if each individual constellations stars property includes the star name. If it does, then it assigns the passFilter to true, which will then add that star object into the array which is being returned from the filter method. 
   },
 
   starsByColor() {

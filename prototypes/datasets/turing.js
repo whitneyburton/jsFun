@@ -1,5 +1,6 @@
 const instructors = [
-  { name: 'Pam', module: 2, teaches: ['scope', 'recursion', 'node'] },
+  { name: 'Pam', module: 2, teaches: ['scope', 'recursion', 'node'] }, //instructor 
+
   { name: 'Brittany', module: 2, teaches: ['oop', 'pwas'] },
   { name: 'Nathaniel', module: 2, teaches: ['oop', 'scope', 'mobile'] },
   { name: 'Robbie', module: 4, teaches: ['node', 'pwas'] },
