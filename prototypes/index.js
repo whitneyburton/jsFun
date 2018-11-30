@@ -32,13 +32,12 @@ const kittyPrompts = {
     return result;
 
     // Annotation:
-    // First we had to determine what prototype method to use, and we chose the filter method because we knew that we would need to return an array that is a subset of the original array based on the color property. Then we needed to return only the name of each kitty, so we chose the map method to grab just the names of the orange kitties. 
+    // First we had to determine what prototype method to use, and we chose the filter method because we knew that we would need to return an array that is a subset of the original array based on the color property. The filter method requires a boolean to be returned, so for each kitty if the color property is orange, that kitty object will be pushed into the new array. Then we needed to return only the name of each kitty, so we chose the map method to iterate over the new filtered array and grab just the names of the orange kitties. 
   },
 
   sortByAge() {
     // Sort the kitties by their age
-    // let sortedKitties = [...kitties]
-    // ... is the spread operator to make a copy of the kitties dataset
+
     const result = kitties.sort((a, b) => {
         return b.age - a.age;
     });
@@ -68,20 +67,19 @@ const kittyPrompts = {
     });
     return result;
   }
+
+    // Annotation:
+    // In order to return an array of kitties who have all grown up by 2 years, we will use the mao method because we know we will be returning an array of the same length as the dataset array that we are working with. For each kitty object within the array, we are working directly with the age property and adding/re-assigning 2 to their current age. We then return the kitty object with the new age to the new array which will be created by the map method. 
+
 };
 
 
 
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
 
 
 
@@ -153,7 +151,7 @@ const modPrompts = {
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Since we are returning an array of the same length and data type, we will use the map method. The map method will iterate through each individual mod object and assign a new variable of studentsPerInstructor to the quotient of the mod objects students property divided by the instructors property (both numbers). Each iteration will return an object whose first key is mod: and the value being the mod's mod property (the number 1, 2, 3, or 4) and second key:value pair being the studentsPerInstructor. The map method will return a new array of these objects. 
   }
 };
 
@@ -193,7 +191,7 @@ const cakePrompts = {
     return result;
 
     // Annotation:
-    // In order to return an array that includes only the flavor and inStock properties of each cake, the 
+    // By using the map method we will return an array of the same length and data type (objects). On each iteration on each cake object, the map method will return an object whose key value pairs are only the flavor (value being the original cakeFlavor property) and inStock (value being the original inStock property).
   },
 
   onlyInStock() {
@@ -223,7 +221,7 @@ const cakePrompts = {
     return result;
 
     // Annotation:
-    // In order to return only the cakes that are in stock, you need to use the filter method to find only the cakes that result in cake.inStock returning "true". The filter method then puts those that are true into a new array. 
+    // In order to return only the cakes that are in stock (therefore an array of a different length of the original), you need to use the filter method to find only the cakes that result in cake.inStock returning "true". The filter method then puts those that are true into a new array. 
   },
   
   totalInventory() {
@@ -237,7 +235,7 @@ const cakePrompts = {
     return result;
 
     // Annotation:
-    // The reduce method here iterates over each cake and starting at 0 for the accumulator, it adds the number thats held as the value for inStock and then that is assigned to be the new accumulator value for the next iteration. 
+    // The reduce method iterates over each cake and starting at 0 for the accumulator, it adds the number thats held as the value for inStock and then that is assigned to be the new accumulator value for the next iteration. Therefore, after the reduce method has iterated over every cake in the cakes array, it will return the accumulator which will have added every value together and will be the total amount of cakes in stock. 
   },
 
   allToppings() {
@@ -283,7 +281,7 @@ const cakePrompts = {
     return result;
 
     // Annotation:
-    // The reduce method allows us to create a new empty object. In the 
+    // The reduce method allows us to create a new empty object as our accumulator. We know that we need this method because we are working with an array dataset and need to return an object. Within the reduce method, we run a forEach loop on each toppings property of each cake object within the array. On each forEach iteration, we run a conditional to first see if each individual topping is already included in the object (by using the bang operator to return true/false whether or not that specific topping is already included) and then if it isn't, that topping is added to the array and assigned to the value of 1 to start. If that topping is already included, then we increment the value of that topping by 1 so that the counter is increased each time that ingredient is needed more than once. After the forEach loop has completed, we return the entire groceryListObj. 
   }
 };
 
@@ -400,7 +398,8 @@ const breweryPrompts = {
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // In order to work with an array and return a single number, I know that I will need to use the reduce method. I begin the accumulator at 0 because I will be adding each breweries beer count to that starting value. The reduce method iterates over each brewery and looks at its 'beers' property length, and adds/assigns that length number to the sum (which is the parameter we passed as the accumulator). 
+    // *** IMPORTANT - must assign the brewery.beers.length to the sum, rather than vice versa. This is like how we assign a variable name to the variable value and not vice versa. When I first did this backwards, the following getBreweryBeerCount's test wouldn't pass because the brewery.beers.length was being added at each beerCount iteration and not showing each breweries individual beerCounts. 
   },
 
   getBreweryBeerCount() {
@@ -422,7 +421,7 @@ const breweryPrompts = {
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Here we are returning an array of the same length as the dataset we are working with so we are using the map method. The map method iterates over each brewery within the array, and returns an object with the key value pairs of brewery's name property and the brewery's beers property's length. 
   },
 
   findHighestAbvBeer() {
@@ -439,7 +438,7 @@ const breweryPrompts = {
     return result.shift();
 
     // Annotation:
-    // 
+    // We know to use the reduce method because we are working with an array and need to return an object. However, we actually first need to use that reduce method to take all of the breweries beers property (which is an array) and concat them into one large array so that we can sort them. Therefore, the reduce method creates a beerArray variable and assigns it to the value of each breweries beers property concatted with the current beerArray on each iteration. The reduce method then returns the total beerArray which now has all of the beers every brewery has listed. We then chain the sort method upon this so that we can take that beerArray and sort each beer's abv property from greatest to least. This returns the new sorted array. Once the sort method has completed, the final return returns the result but has the shift() method upon it so that it actually only returns the first element within the beerArray which is the beer with the highest ABV. 
   }
 };
 
